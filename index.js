@@ -2,10 +2,20 @@ const rp = require('request-promise')
 const uuidV1 = require('uuid/v1');
 const IPECHO_URL = 'http://ipecho.net/plain'
 
+const ENV_VARIABLES_MANDATORY = ['TOKEN', 'DOMAIN_ID']
+
+ENV_VARIABLES_MANDATORY.forEach(key => {
+    if(!process.env[key]){
+        console.log(`the environement variable ${key} is not defined.`)
+        console.log("Exiting application")
+        process.exit(1)
+    }
+})
+
 const API_ENDPOINT = process.env.API_ENDPOINT || 'https://api.online.net/api'
 const API_VERSION = process.env.API_VERSION || 'v1'
 const TOKEN = process.env.TOKEN
-const DOMAIN_NAME = process.env.DOMAIN_
+const DOMAIN_ID = process.env.DOMAIN_ID
 const SUBDOMAIN = process.env.SUBDOMAIN || 'home'
 
 const getOptions = (url, options) => ({
