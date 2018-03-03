@@ -15,6 +15,7 @@ ENV_VARIABLES_MANDATORY.forEach(key => {
 const API_ENDPOINT = process.env.API_ENDPOINT || 'https://api.online.net/api'
 const API_VERSION = process.env.API_VERSION || 'v1'
 const SUBDOMAIN_DEFAULT_PRIORITY = process.env.SUBDOMAIN_DEFAULT_PRIORITY || 12
+const ZONE_PREFIX = process.env.ZONE_PREFIX || "autoZone_"
 const TOKEN = process.env.TOKEN
 const DOMAIN_NAME = process.env.DOMAIN_NAME
 const SUBDOMAIN = process.env.SUBDOMAIN || 'home'
@@ -46,7 +47,7 @@ rp(getOptions(`domain`))
         return updatedZone
     })
     .then(updatedZone => {
-        const name = `autoZone_${uuidV1()}`
+        const name = `${ZONE_PREFIX}${uuidV1()}`
         return rp(getOptions(`domain/${domain_id}/version`, { method: 'POST', body: { name } }))
             .then(() => rp(getOptions(`domain/${domain_id}/version`)))
             .then(versions => versions.find(v => v.name === name).uuid_ref)
