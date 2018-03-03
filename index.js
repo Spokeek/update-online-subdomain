@@ -22,6 +22,7 @@ const SUBDOMAIN = process.env.SUBDOMAIN || 'home'
 
 const getOptions = (url, options) => ({
     uri: `${API_ENDPOINT}/${API_VERSION}/${url}`,
+    simple: false,
     headers: {
         'Authorization': `Bearer ${TOKEN}`
     },
@@ -57,4 +58,5 @@ rp(getOptions(`domain`))
             })))
     })
 )
+.then(() => console.log("Generation done"))
 .catch(e => console.error(e.message))
