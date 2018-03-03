@@ -43,7 +43,6 @@ rp(getOptions(`domain`))
         return subdomains.map(s => s.name === SUBDOMAIN ? { ...s, data: external_ip } : s)
     })
     .then(updatedZone => {
-        //updatedZone.forEach(s => console.log(`${s.name} : ${s.data}`))
         return updatedZone
     })
     .then(updatedZone => {
